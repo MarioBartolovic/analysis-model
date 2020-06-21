@@ -1,8 +1,6 @@
 package edu.hm.hafner.analysis;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Stream;
 
 import static edu.hm.hafner.analysis.PackageDetectors.*;
 
@@ -28,12 +26,8 @@ class CSharpNamespaceDetector extends AbstractPackageDetector {
     }
 
     @Override
-    public String detectPackageName(final Stream<String> lines) {
-        return lines.map(NAMESPACE_PATTERN::matcher)
-                .filter(Matcher::matches)
-                .findFirst()
-                .map(matcher -> matcher.group(1))
-                .orElse(UNDEFINED_PACKAGE).trim();
+    Pattern getPattern() {
+        return NAMESPACE_PATTERN;
     }
 }
 

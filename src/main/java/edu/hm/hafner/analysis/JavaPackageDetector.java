@@ -1,8 +1,6 @@
 package edu.hm.hafner.analysis;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Stream;
 
 import static edu.hm.hafner.analysis.PackageDetectors.*;
 
@@ -24,17 +22,13 @@ class JavaPackageDetector extends AbstractPackageDetector {
     }
 
     @Override
-    public String detectPackageName(final Stream<String> lines) {
-        return lines.map(PACKAGE_PATTERN::matcher)
-                .filter(Matcher::matches)
-                .findFirst()
-                .map(matcher -> matcher.group(1))
-                .orElse(UNDEFINED_PACKAGE);
+    public boolean accepts(final String fileName) {
+        return fileName.endsWith(".java");
     }
 
     @Override
-    public boolean accepts(final String fileName) {
-        return fileName.endsWith(".java");
+    Pattern getPattern() {
+        return PACKAGE_PATTERN;
     }
 }
 

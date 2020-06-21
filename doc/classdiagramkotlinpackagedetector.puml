@@ -1,0 +1,51 @@
+@startuml
+
+class KotlinPackageDetector {
+    -{static} PACKAGE_PATTERN: Pattern
+    #boolean accepts(String)
+    #Pattern getPattern()
+
+}
+
+class JavaPackageDetector {
+    -{static} PACKAGE_PATTERN: Pattern
+    #boolean accepts(String)
+    #Pattern getPattern()
+
+}
+
+class CSharpNamespaceDetector {
+    -{static} NAMESPACE_PATTERN: Pattern
+    #boolean accepts(String)
+    #Pattern getPattern()
+
+}
+
+abstract AbstractPackageDetector {
+    -fileSystem: FileSystem
+    +String detectPackageName(String, Charset)
+    +String detectPackageName(Stream<String>)
+    {abstract} #boolean accepts()
+    {abstract} #Pattern getPattern()
+}
+
+class PackageDetectors {
+    #{static} UNDEFINED_PACKAGE: String
+    -detectors: List<AbstractPackageDetector>
+    +String detectPackageName(String, Charset)
+}
+
+class FileSystem    {
+    #InputStream openFile()
+}
+
+KotlinPackageDetector --|> AbstractPackageDetector
+JavaPackageDetector --|> AbstractPackageDetector
+CSharpNamespaceDetector --|> AbstractPackageDetector
+PackageDetectors -|> FileSystem
+PackageDetectors --|> JavaPackageDetector
+PackageDetectors --|> CSharpNamespaceDetector
+PackageDetectors --|> KotlinPackageDetector
+
+
+@enduml
