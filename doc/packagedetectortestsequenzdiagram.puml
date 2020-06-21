@@ -1,0 +1,32 @@
+@startuml
+
+JUnit -> ResourceTest : creates ResourceTest
+
+ResourceTest -> PackageDetectorsTest : creates PackageDetectorsTest
+
+PackageDetectorsTest -> PackageDetectors : shouldExtractPackageNames() for all tested csv
+
+create JavaPackageDetector
+PackageDetectors -> JavaPackageDetector
+
+PackageDetectors <-- JavaPackageDetector
+
+create CSharpNamespaceDetector
+PackageDetectors -> CSharpNamespaceDetector
+
+PackageDetectors <-- CSharpNamespaceDetector
+
+create KotlinPackageDetector
+PackageDetectors -> KotlinPackageDetector
+
+PackageDetectors <-- KotlinPackageDetector
+
+PackageDetectors -> PackageDetectors : checks if package is accepted
+
+PackageDetectors --> PackageDetectorsTest
+
+ResourceTest <-- PackageDetectorsTest
+
+JUnit <-- ResourceTest
+
+@enduml

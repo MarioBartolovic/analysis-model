@@ -41,9 +41,9 @@ class KotlinPackageDetectorTest extends ResourceTest {
 
     @Test
     void shouldAcceptCorrectFileSuffix() {
-        JavaPackageDetector packageDetector = new JavaPackageDetector();
+        KotlinPackageDetector packageDetector = new KotlinPackageDetector();
         assertThat(packageDetector.accepts("Action.java")).as("Does not accept a Java file.")
-                .isTrue();
+                .isFalse();
         assertThat(packageDetector.accepts("ActionBinding.cs")).as("Accepts a non-Java file.")
                 .isFalse();
         assertThat(packageDetector.accepts("pom.xml")).as("Accepts a non-C# file.")
