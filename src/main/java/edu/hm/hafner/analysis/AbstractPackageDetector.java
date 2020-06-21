@@ -94,5 +94,9 @@ abstract class AbstractPackageDetector {
      */
     abstract boolean accepts(String fileName);
 
+    /**
+     * Getter for the Pattern from the PackageDetector
+     * @return the Package Pattern
+     */
     abstract Pattern getPattern();
 }
