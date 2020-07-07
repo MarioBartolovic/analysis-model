@@ -39,6 +39,7 @@ class FileSystem    {
     #InputStream openFile()
 }
 
+
 KotlinPackageDetector --|> AbstractPackageDetector
 JavaPackageDetector --|> AbstractPackageDetector
 CSharpNamespaceDetector --|> AbstractPackageDetector

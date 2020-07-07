@@ -1,5 +1,6 @@
 @startuml
 
+
 JUnit -> ResourceTest : creates ResourceTest
 
 ResourceTest -> PackageDetectorsTest : creates PackageDetectorsTest
